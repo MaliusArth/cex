@@ -1,0 +1,39 @@
+vs/home/maliusarth/projects/ext/projects/cmake/llvm/6.0.0/x64/include/llvm/IR
+
+/home/maliusarth/bin/GitExtensions
+
+from CMakeLists.txt (inject++/lib)
+${CMAKE_CURRENT_SOURCE_DIR}
+/home/maliusarth/projects/ext/repos/llvm/6.0.0/tools/clang/tools/extra/inject++/lib
+
+
+clang:
+ plugins
+ libtooling
+
+llvm passes (also plugins)
+ more possibilities (clang stuff probably wont be enough)
+
+
+
+/home/maliusarth/projects/ext/projects/cmake/llvm/6.0.0/x64/bin/inject++
+/home/maliusarth/projects/ext/projects/cmake/llvm/6.0.0/x64/lib/libInject.a
+
+
+how to add a pre build step?
+
+
+edited clang src:
+/home/maliusarth/projects/ext/repos/llvm/6.0.0/tools/clang/lib/Parse/ParsePragma.cpp
+/home/maliusarth/projects/ext/repos/llvm/6.0.0/tools/clang/include/clang/Basic/TokenKinds.def
+/home/maliusarth/projects/ext/repos/llvm/6.0.0/tools/clang/lib/Parse/ParseStmt.cpp
+/home/maliusarth/projects/ext/repos/llvm/6.0.0/tools/clang/include/clang/Basic/DiagnosticParseKinds.td
+
+
+open nemo tabs:
+/home/maliusarth/projects/ext/repos/llvm/6.0.0/tools/clang/tools/extra
+/home/maliusarth/projects/ext/projects/cmake/llvm/6.0.0/x64/include
+/home/maliusarth/projects/ext/repos/llvm/6.0.0/tools/clang/include/clang/Basic
+/home/maliusarth/projects/ext/repos/llvm/6.0.0/tools/clang/lib/Parse
+/home/maliusarth/projects/ext/repos/llvm/6.0.0/tools/clang/lib/Sema
+/home/maliusarth/projects/ext/repos/llvm/6.0.0

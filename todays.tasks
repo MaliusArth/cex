@@ -1,0 +1,6 @@
+25.05.2018:
+	☐ setup CMakeLists.txt files properly
+		☐ add compileCommands to c_cpp_properties.json
+		"compileCommands": "/home/maliusarth/projects/ext/projects/cmake/llvm/6.0.0/x64/compile_commands.json",
+	
+	

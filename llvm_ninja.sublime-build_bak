@@ -1,0 +1,4 @@
+{
+	"working_dir": "~/projects/ext/projects/cmake/llvm/6.0.0/x64",
+	"shell_cmd": "ninja tut-loop-convert"
+}

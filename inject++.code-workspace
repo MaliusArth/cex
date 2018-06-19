@@ -1,0 +1,24 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"typeinfo": "cpp",
+			"system_error": "cpp",
+			"type_traits": "cpp",
+			"*.inc": "cpp",
+			"bitset": "cpp",
+			"*.def": "cpp",
+			"ratio": "cpp",
+			"chrono": "cpp",
+			"iosfwd": "cpp",
+			"cmath": "cpp"
+		}
+	},
+	"extensions": {
+		"recommendations": []
+	}
+}
