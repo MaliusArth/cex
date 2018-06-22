@@ -15,7 +15,8 @@
 			"ratio": "cpp",
 			"chrono": "cpp",
 			"iosfwd": "cpp",
-			"cmath": "cpp"
+			"cmath": "cpp",
+			"cstdio": "cpp"
 		}
 	},
 	"extensions": {
