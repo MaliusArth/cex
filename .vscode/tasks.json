@@ -175,5 +175,14 @@
             ],
             "group": "build"
         },
+        {
+            "label": "ninja build test",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceFolder}/inject++/test/build"
+            },
+            "command": "ninja -v inject_test",
+            "group": "build"
+        },
     ]
 }
