@@ -92,13 +92,19 @@ namespace ma
 			// http://en.cppreference.com/w/cpp/utility/variadic
 			// http://en.cppreference.com/w/cpp/language/variadic_arguments
 			//template<typename... Args>
-			virtual void Log(const char* channel, Type type, size_t verbosity, const SourceInfo& sourceInfo, const char* format, /*Args ...*/ va_list args) = 0;
+			virtual void Log(
+				const char* channel, Type type, size_t verbosity,
+				const SourceInfo& sourceInfo,
+				const char* format, /*Args ...*/ va_list args) = 0;
 
 			// As you can see, it's nothing more than a very simple base class with one virtual function. The arguments are the log-channel (e.g. "TextureManager", "SoundEngine", "Memory", etc), the type of log (e.g. INFO, WARNING, ERROR, FATAL, ASSERT), the verbosity level, a wrapper around source-code information (file name, function name, line number), and last but not least the message itself in terms of a format string and a variable number of arguments. Nothing spectacular so far.
 
 			//template<typename... Args>
 			//static void Dispatch(const char* channel, Type type, size_t verbosity, const SourceInfo& sourceInfo, const char* format, /*Args &&...*/ va_list args);
-			static void Dispatch(const char* channel, Type type, size_t verbosity, const SourceInfo& sourceInfo, const char* format, /*Args &&...*/ /*va_list args*/ ...);
+			static void Dispatch(
+				const char* channel, Type type, size_t verbosity,
+				const SourceInfo& sourceInfo,
+				const char* format, /*Args &&...*/ /*va_list args*/ ...);
 
 		private:
 			void AddToList(void);
@@ -186,16 +192,26 @@ namespace ma
 		{
 		public:
 			LoggerImpl(void) = default;
-			LoggerImpl(FilterPolicy&& filter, FormatPolicy&& formatter, WritePolicy&& writer)
+			LoggerImpl(
+				FilterPolicy&& filter,
+				FormatPolicy&& formatter,
+				WritePolicy&& writer
+			)
+			 : m_filter(std::move(filter)),
+			   m_formatter(std::move(formatter)),
+			   m_writer(std::move(writer))
 			{
-				m_filter = std::move(filter);
-				m_formatter = std::move(formatter);
-				m_writer = std::move(writer);
+				// m_filter = std::move(filter);
+				// m_formatter = std::move(formatter);
+				// m_writer = std::move(writer);
 			}
 
-			virtual void Log(const char* channel, Type type, size_t verbosity, const SourceInfo& sourceInfo, const char* format, /*Args ...*/ va_list args) MA_OVERRIDE
+			virtual void Log(
+				const char* channel, Type type, size_t verbosity,
+				const SourceInfo& sourceInfo,
+				const char* format, /*Args ...*/ va_list args
+			) MA_OVERRIDE
 			{
-
 				if (m_filter.Filter(channel, type, verbosity, sourceInfo, format, args))
 				{
 					//char buffer[1024];

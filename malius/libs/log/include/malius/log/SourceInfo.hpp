@@ -14,7 +14,8 @@ namespace ma
     {
         struct SourceInfo
         {
-            SourceInfo(const char* source_file, const char* source_func, int source_line) : file(source_file), func(source_func), line(source_line) {}
+            SourceInfo(const char* source_file, const char* source_func, int source_line)
+             : file(source_file), func(source_func), line(source_line) {}
             const char* file;
             const char* func;
             int line;

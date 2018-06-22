@@ -38,12 +38,12 @@ namespace ma
         {
             if (value < m_min)
             {
-                 MA_WARNING("Config", "Could not set value %d for setting \"%s\" because it is smaller than the minimum. It will be set to %d.", value, m_name, m_min);
+                MA_WARNING("Config", "Could not set value %d for setting \"%s\" because it is smaller than the minimum. It will be set to %d.", value, m_name, m_min);
                 value = m_min;
             }
             else if (value > m_max)
             {
-                 MA_WARNING("Config", "Could not set value %d for setting \"%s\" because it is greater than the maximum. It will be set to %d.", value, m_name, m_max);
+                MA_WARNING("Config", "Could not set value %d for setting \"%s\" because it is greater than the maximum. It will be set to %d.", value, m_name, m_max);
                 value = m_max;
             }
 
