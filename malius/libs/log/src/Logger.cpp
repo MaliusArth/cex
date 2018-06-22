@@ -86,7 +86,6 @@ void Logger::AddToList(void)
 	if (head)
 	{
 		tail->m_next = this;
-		// TODO: Malius added this but is it neccessary? ... yes
 		m_prev = tail;
 		tail = this;
 	}
@@ -101,15 +100,22 @@ void Logger::RemoveFromList(void)
 {
 	if (head == this)
 	{
-		m_next->m_prev = nullptr;
+		if(m_next)
+		{
+			m_next->m_prev = nullptr;
+		}
 		head = m_next;
 	}
 	else
 	{
-		m_prev->m_next = m_next;
 		if (m_next)
 		{
+			m_prev->m_next = m_next;
 			m_next->m_prev = m_prev;
+		}
+		else
+		{
+			m_prev->m_next = nullptr;
 		}
 	}
 }

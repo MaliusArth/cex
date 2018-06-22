@@ -42,7 +42,7 @@ namespace ma
 			bool Filter(const char* channel, Type type, size_t verbosity, const SourceInfo& sourceInfo, const char* format, /*Args ...*/ va_list args)
 			{
 				// filter based on verbosity
-				if (verbosity >= filteredVerbosity)
+				if (filteredVerbosity >= verbosity)
 				{
 					return true;
 				}
@@ -82,7 +82,12 @@ namespace ma
 		{
 			/// TODO: Format
 			template<size_t T>
-			void Format(MA_OUT Buffer<T>& buffer, const char* channel, Type type, size_t verbosity, const SourceInfo& sourceInfo, const char* format, /*Args ...*/ va_list args)
+			void Format(
+				MA_OUT Buffer<T>& buffer, 
+				const char* channel, Type type, size_t verbosity, 
+				const SourceInfo& sourceInfo, 
+				const char* format, /*Args ...*/ va_list args
+			)
 			{
 				// simple format, e.g. "[TextureManager] the log message";
 /* 				const char*
@@ -94,26 +99,35 @@ namespace ma
 				logType.emplace(Type::Assert, "ASSERT"); */
 				//logType.at(type);
 
-				//buffer.data =
-
 				// format message
-				char msg_format[T] = "%s(%i): [%s] (%s)\t";
-				char final_msg[T];
+				char full_format[T];
+				char msg[T] = "%s(%i): [%s] (%s)\t";
 
-				size_t msg_size = strlen(format);
-				printf("%zu", msg_size);
+				// size_t msg_size = strlen(format);
+				// printf("%zu", msg_size);
+
+				// char const *testStr = typeStringLUT[static_cast<size_t>(type)];
+
+				snprintf(full_format, T, msg, 
+					sourceInfo.file, sourceInfo.line, 
+					channel, typeStringLUT[static_cast<size_t>(type)],
+					format);
 
 #if MA_COMPILER_VC
 				::strncat_s(msg_format, sizeof(msg_format), format, sizeof(msg_format));
 #else
-				::strncat(msg_format, format, sizeof(msg_format) - strlen(msg_format) - 1);
+				::strncat(full_format, format, sizeof(full_format) - strlen(full_format) - 1);
 #endif
-				snprintf(final_msg, sizeof(final_msg), msg_format,
-					sourceInfo.file, sourceInfo.line, channel, typeStringLUT[static_cast<size_t>(type)-1u],
-					args);
-				// snprintf(final_msg, sizeof(final_msg), "%s(%i): [%s] (%s)\t%s", sourceInfo.file, sourceInfo.line, channel, typeStringLUT[type-1], args);
+				vsnprintf(msg, T, full_format, args);
 
-				::memcpy(final_msg, buffer.data, sizeof(buffer.size()));
+				//vsnprintf(msg, T, msg_format,
+				//	sourceInfo.file, sourceInfo.line, channel, typeStringLUT[static_cast<size_t>(type)-1u],
+				//	args);
+				// snprintf(msg, T, "%s(%i): [%s] (%s)\t%s", sourceInfo.file, sourceInfo.line, channel, typeStringLUT[type-1], args);
+
+				int test = strlen(msg);
+				::strncpy(buffer.data, msg, T);
+				// ::memcpy(msg, buffer.data, strlen(msg));
 			}
 		};
 
@@ -147,7 +161,7 @@ namespace ma
 			void Write(const Buffer<T>& buffer)
 			{
 				// output to the console
-				printf("%s", buffer.data);
+				printf("%s\n", buffer.data);
 			}
 		};
 

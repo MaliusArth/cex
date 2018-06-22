@@ -126,7 +126,7 @@ class FindNamedClassAction : public clang::ASTFrontendAction
 int main(int argc, const char **argv)
 {
 	ma::log::ConsoleLogger logger(
-		ma::log::VerbosityFilterPolicy(3),
+		ma::log::VerbosityFilterPolicy(2),
 		ma::log::SimpleFormatPolicy(),
 		ma::log::ConsoleWriterPolicy()
 	);
