@@ -45,7 +45,7 @@ namespace
 {
 	// Apply a custom category to all command-line options so that they are the
 	// only ones displayed.
-	static llvm::cl::OptionCategory MyToolCategory("inject++ options");
+	static llvm::cl::OptionCategory MyToolCategory("inject++ Options");
 
 	// CommonOptionsParser declares HelpMessage with a description of the common
 	// command-line options related to the compilation database and input files.
@@ -54,7 +54,7 @@ namespace
 		CommonHelp(clang::tooling::CommonOptionsParser::HelpMessage);
 
 	// A help message for the specific tool can be added afterwards.
-	static llvm::cl::extrahelp MoreHelp("\nMore help text...");
+	static llvm::cl::extrahelp MoreHelp("\nMore help text...\n");
 }
 
 //  #define ANNOTATION
@@ -125,6 +125,8 @@ class FindNamedClassAction : public clang::ASTFrontendAction
 
 int main(int argc, const char **argv)
 {
+	printf("main argc: %d\n", argc);
+
 	ma::log::ConsoleLogger logger(
 		ma::log::VerbosityFilterPolicy(2),
 		ma::log::SimpleFormatPolicy(),
@@ -155,5 +157,7 @@ int main(int argc, const char **argv)
 	// using fp2 = void(int, int);
 
 	// ASTFrontEndAction test;
-	return tool.run(clang::tooling::newFrontendActionFactory(&finder).get());
+	auto result = 
+		tool.run(clang::tooling::newFrontendActionFactory(&finder).get());
+	return result;
 }
