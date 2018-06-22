@@ -1,0 +1,179 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "ninja build",
+            "type": "shell",
+            "options": {
+                "cwd": "/home/maliusarth/projects/ext/projects/cmake/llvm/6.0.0/x64"
+            },
+            "command": "ninja -v ${workspaceFolderBasename}",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "ninja clean",
+            "type": "shell",
+            "options": {
+                "cwd": "/home/maliusarth/projects/ext/projects/cmake/llvm/6.0.0/x64"
+            },
+            "command": "ninja -v -t clean ${workspaceFolderBasename}",
+            "group": "build"
+        },
+        {
+            "label": "ninja rebuild",
+            "dependsOn": "ninja clean",
+            "type": "shell",
+            "options": {
+                "cwd": "/home/maliusarth/projects/ext/projects/cmake/llvm/6.0.0/x64"
+            },
+            "command": "ninja -v ${workspaceFolderBasename}",
+            "group": "build"
+        },
+        {
+            "label": "clang emit bitcode - single file",
+            "type": "shell",
+            "options": {
+                "cwd": "/home/maliusarth/projects/ext/projects/cmake/llvm/6.0.0/x64"
+            },
+            "command": "clang++",
+            "args": [
+                "-c",
+                "${file}",
+                "-S",
+                "-emit-llvm",
+                "-o",
+                "${file}.bc"
+            ],
+            "group": "build"
+        },
+        {
+            "label": "clang emit bitcode",
+            "type": "shell",
+            "options": {
+                "cwd": "/home/maliusarth/projects/ext/projects/cmake/llvm/6.0.0/x64"
+            },
+            "command": "clang++",
+            "args": [
+                "-DGTEST_HAS_RTTI=0",
+                "-D_DEBUG",
+                "-D_GNU_SOURCE",
+                "-D__STDC_CONSTANT_MACROS",
+                "-D__STDC_FORMAT_MACROS",
+                "-D__STDC_LIMIT_MACROS",
+                "-fno-exceptions",
+                "-fno-rtti",
+                "-fno-common",
+                "-fPIC",
+                "-fvisibility-inlines-hidden",
+                "-fcolor-diagnostics",
+                "-ffunction-sections",
+                "-fdata-sections",
+                "-Wall",
+                "-W",
+                "-Wno-unused-parameter",
+                "-Wwrite-strings",
+                "-Wcast-qual",
+                "-Wmissing-field-initializers",
+                "-pedantic",
+                "-Wno-long-long",
+                "-Wcovered-switch-default",
+                "-Wnon-virtual-dtor",
+                "-Wdelete-non-virtual-dtor",
+                "-Wstring-conversion",
+                "-Woverloaded-virtual",
+                "-Wno-nested-anon-types",
+                "-Werror=date-time",
+                "-Werror=unguarded-availability-new",
+                "-std=c++11",
+                "-O3",
+                "-UNDEBUG",
+                "-c", //Only run preprocess, compile, and assemble steps
+                // includes
+                // llvm 
+                "-I/home/maliusarth/projects/ext/repos/llvm/6.0.0/include",
+                "-I/home/maliusarth/projects/ext/repos/llvm/6.0.0/tools/clang/include",
+                // code gen
+                "-Iinclude",
+                "-Itools/clang/include",
+                "-Itools/clang/tools/extra/inject++",
+                // project
+                "-I${workspaceFolder}/inject++/include",
+                "-S",
+                "-emit-llvm",
+                // src - inputs
+                "${workspaceFolder}/inject++/tool/main.cpp",
+                // "${workspaceFolder}/inject++/libInject.cpp",
+                "-o",
+                "${workspaceFolder}/${workspaceFolderBasename}.bc"
+            ],
+            "group": "build"
+        },
+        {
+            "label": "clang build",
+            "type": "shell",
+            "options": {
+                "cwd": "/home/maliusarth/projects/ext/projects/cmake/llvm/6.0.0/x64"
+            },
+            "command": "clang++",
+            "args": [
+                "-DGTEST_HAS_RTTI=0",
+                "-D_DEBUG",
+                "-D_GNU_SOURCE",
+                "-D__STDC_CONSTANT_MACROS",
+                "-D__STDC_FORMAT_MACROS",
+                "-D__STDC_LIMIT_MACROS",
+                "-fno-exceptions",
+                "-fno-rtti",
+                "-fno-common",
+                "-fPIC",
+                "-fvisibility-inlines-hidden",
+                "-fcolor-diagnostics",
+                "-ffunction-sections",
+                "-fdata-sections",
+                "-Wall",
+                "-W",
+                "-Wno-unused-parameter",
+                "-Wwrite-strings",
+                "-Wcast-qual",
+                "-Wmissing-field-initializers",
+                "-pedantic",
+                "-Wno-long-long",
+                "-Wcovered-switch-default",
+                "-Wnon-virtual-dtor",
+                "-Wdelete-non-virtual-dtor",
+                "-Wstring-conversion",
+                "-Woverloaded-virtual",
+                "-Wno-nested-anon-types",
+                "-Werror=date-time",
+                "-Werror=unguarded-availability-new",
+                "-std=c++11",
+                "-O3",
+                "-UNDEBUG",
+                "-c", //Only run preprocess, compile, and assemble steps
+                // includes
+                // llvm 
+                "-I/home/maliusarth/projects/ext/repos/llvm/6.0.0/include",
+                "-I/home/maliusarth/projects/ext/repos/llvm/6.0.0/tools/clang/include",
+                // code gen
+                "-Iinclude",
+                "-Itools/clang/include",
+                "-Itools/clang/tools/extra/inject++",
+                // project
+                "-I${workspaceFolder}/inject++/include",
+                // "-S",
+                // "-emit-llvm",
+                // src - inputs
+                "${workspaceFolder}/inject++/tool/main.cpp",
+                // "${workspaceFolder}/inject++/libInject.cpp",
+                // "-o",
+                // "${workspaceFolder}/${workspaceFolderBasename}.bc"
+            ],
+            "group": "build"
+        },
+    ]
+}

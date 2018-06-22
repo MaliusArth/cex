@@ -1,0 +1,34 @@
+{
+	// Use IntelliSense to learn about possible attributes.
+	// Hover to view descriptions of existing attributes.
+	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "lldb C++",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "/home/maliusarth/projects/ext/projects/cmake/llvm/6.0.0/x64/bin/inject++",
+			"args": ["src/test.cpp"],
+			"stopAtEntry": true,
+			"cwd": "${workspaceFolder}/inject++/test",
+			"environment": [],
+			"externalConsole": false,
+			"MIMode": "lldb",
+			"miDebuggerPath": "/usr/bin/lldb-mi-6.0",
+			"internalConsoleOptions": "openOnSessionStart",
+			// "preLaunchTask": "ninja build"
+			//"setupCommands": [
+			//	{
+			//		"description": "Enable pretty-printing for gdb",
+			//		"text": "-enable-pretty-printing",
+			//		"ignoreFailures": true
+			//	}
+			//]
+			// "additionalSOLibSearchPath": ""
+/* 			"logging": {
+				"programOutput": true
+			} */
+		}
+	]
+}
