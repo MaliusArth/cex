@@ -1,6 +1,8 @@
 #pragma once
 #include <malius/core/lang.hpp>
 
+#include <limits>
+
 // Reference: https://blog.molecular-matters.com/2011/06/27/config-values/
 
 namespace ma
@@ -12,12 +14,23 @@ namespace ma
         public:
             /// Registers an integer setting
             MA_INLINE ConfigSettingInt(const char* name, const char* synopsis, int initialValue)
+             : m_next(nullptr),
+               m_name(name),
+               m_synopsis(synopsis),
+               m_value(initialValue),
+               m_min(std::numeric_limits<int>::min()),
+               m_max(std::numeric_limits<int>::max())
             {
                 AddToList();
             };
 
             /// Registers an integer setting, constraining it to the range [minValue, maxValue]
             MA_INLINE ConfigSettingInt(const char* name, const char* synopsis, int initialValue, int minValue, int maxValue)
+             : m_name(name),
+               m_synopsis(synopsis),
+               m_value(initialValue),
+               m_min(minValue),
+               m_max(maxValue)
             {
                 AddToList();
             };
