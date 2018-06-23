@@ -16,7 +16,6 @@
 			"externalConsole": false,
 			"MIMode": "lldb",
 			"miDebuggerPath": "/usr/bin/lldb-mi-6.0",
-			"internalConsoleOptions": "openOnSessionStart",
 			// "preLaunchTask": "ninja build"
 			//"setupCommands": [
 			//	{
