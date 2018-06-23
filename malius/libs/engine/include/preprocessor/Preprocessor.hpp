@@ -130,8 +130,8 @@
 
 //     MA_PP_GLUE( MA_PP_TEST2, (test4, 7))  MA_PP_EXPAND( MA_PP_FOR_EACH_2( MA_PP_TEST2, (test5, 13), (test6, 28)))
 //
-//    printf("with macro %d %d %d %d %d %d\n",  MA_PP_STRIP_PARENS((5, 6, 7, 8, 9, 10)));
-//    printf("with macro %d\n",  MA_PP_STRIP_PARENS(10));
+//    std::printf("with macro %d %d %d %d %d %d\n",  MA_PP_STRIP_PARENS((5, 6, 7, 8, 9, 10)));
+//    std::printf("with macro %d\n",  MA_PP_STRIP_PARENS(10));
 //
 //     MA_PP_IF( MA_PP_IS_PAREN(x))(op x, op(x))
 //

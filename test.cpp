@@ -5,12 +5,12 @@
 
 int ma_ct_main(void) MA_INJECT
 {
-	printf("compile time execution");
+	std::printf("compile time execution");
 	return 1;
 }
 
 int main(int argc, const char **argv)
 {
-	printf("Hello world!: %d", 7);
+	std::printf("Hello world!: %d", 7);
 	return 1;
 }

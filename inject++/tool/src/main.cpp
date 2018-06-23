@@ -125,7 +125,7 @@ class FindNamedClassAction : public clang::ASTFrontendAction
 
 int main(int argc, const char **argv)
 {
-	printf("main argc: %d\n", argc);
+	std::printf("main argc: %d\n", argc);
 
 	ma::log::ConsoleLogger logger(
 		ma::log::VerbosityFilterPolicy(2),

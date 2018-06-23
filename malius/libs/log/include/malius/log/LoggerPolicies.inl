@@ -104,7 +104,7 @@ namespace ma
 				char msg[T] = "%s(%i): [%s] (%s)\t";
 
 				// size_t msg_size = strlen(format);
-				// printf("%zu", msg_size);
+				// std::printf("%zu", msg_size);
 
 				// char const *testStr = typeStringLUT[static_cast<size_t>(type)];
 
@@ -161,7 +161,7 @@ namespace ma
 			void Write(const Buffer<T>& buffer)
 			{
 				// output to the console
-				printf("%s\n", buffer.data);
+				std::printf("%s\n", buffer.data);
 			}
 		};
 

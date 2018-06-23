@@ -110,8 +110,8 @@ namespace ma
                 j++;
                 std::cout << std::endl;
             }
-            printf("%c", GetBit(i) ? '1' : '0');
+            std::printf("%c", GetBit(i) ? '1' : '0');
         }
-        printf("\n");
+        std::printf("\n");
     }
 }
