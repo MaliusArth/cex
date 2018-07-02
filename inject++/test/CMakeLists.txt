@@ -33,7 +33,7 @@ add_executable(inject_test
 )
 
 # Just for example add some compiler flags.
-target_compile_options(inject_test PUBLIC -std=c++11 -Wall -Wfloat-conversion)
+target_compile_options(inject_test PUBLIC -std=c++11 -Wall -Wfloat-conversion -DMA_COMPILE_TIME_RUN)
 
 # This allows to include files relative to the root of the src directory with a <> pair
 # target_include_directories(inject_test PUBLIC include)

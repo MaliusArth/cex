@@ -9,14 +9,14 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "/home/maliusarth/projects/ext/projects/cmake/llvm/6.0.0/x64/bin/inject++",
-			"args": ["src/test.cpp"],
+			"args": ["-run=ma_ct_main()", "src/test.cpp"],
 			"stopAtEntry": true,
 			"cwd": "${workspaceFolder}/inject++/test",
 			"environment": [],
 			"externalConsole": false,
 			"MIMode": "lldb",
 			"miDebuggerPath": "/usr/bin/lldb-mi-6.0",
-			// "preLaunchTask": "ninja build"
+			"preLaunchTask": "ninja build"
 			//"setupCommands": [
 			//	{
 			//		"description": "Enable pretty-printing for gdb",

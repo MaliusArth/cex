@@ -9,11 +9,26 @@
             "options": {
                 "cwd": "/home/maliusarth/projects/ext/projects/cmake/llvm/6.0.0/x64"
             },
-            "command": "ninja -v ${workspaceFolderBasename}",
+            "command": "clear && ninja ${workspaceFolderBasename}",
             "group": {
                 "kind": "build",
                 "isDefault": true
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
             }
+        },
+        {
+            "label": "cmake rerun",
+            "type": "shell",
+/*             "options": {
+                "cwd": "/home/maliusarth/projects/ext/projects/cmake/llvm/6.0.0/x64"
+            }, */
+            "command": "clear && cmake -H/home/maliusarth/projects/ext/repos/llvm/6.0.0 -B/home/maliusarth/projects/ext/projects/cmake/llvm/6.0.0/x64",
+            "group":  "build"
         },
         {
             "label": "ninja clean",
@@ -94,7 +109,7 @@
                 "-UNDEBUG",
                 "-c", //Only run preprocess, compile, and assemble steps
                 // includes
-                // llvm 
+                // llvm
                 "-I/home/maliusarth/projects/ext/repos/llvm/6.0.0/include",
                 "-I/home/maliusarth/projects/ext/repos/llvm/6.0.0/tools/clang/include",
                 // code gen
@@ -156,7 +171,7 @@
                 "-UNDEBUG",
                 "-c", //Only run preprocess, compile, and assemble steps
                 // includes
-                // llvm 
+                // llvm
                 "-I/home/maliusarth/projects/ext/repos/llvm/6.0.0/include",
                 "-I/home/maliusarth/projects/ext/repos/llvm/6.0.0/tools/clang/include",
                 // code gen
