@@ -1,10 +1,48 @@
-vs/home/maliusarth/projects/ext/projects/cmake/llvm/6.0.0/x64/include/llvm/IR
+
+job search: purple lamp ist eher flexibler teilzeit jobs zu geben als mipumi
+einfach fragen! kein problem
+
+bisschen ein schmäh in der bewerbung würde gut ankommen bei mipumi (laut david (mipumi))
+
+ich hab erfahrung mit breakpoints/tracepoints/disassembly (?)
+
+
+/home/maliusarth/projects/ext/projects/cmake/llvm/6.0.0/x64/include/llvm/IR
 
 /home/maliusarth/bin/GitExtensions
 
 from CMakeLists.txt (inject++/lib)
 ${CMAKE_CURRENT_SOURCE_DIR}
 /home/maliusarth/projects/ext/repos/llvm/6.0.0/tools/clang/tools/extra/inject++/lib
+
+
+consider renaming inject++ to compile++ or compile-time_exec
+namespace compile_time_code_execution
+namespace cex
+namespace ctce
+namespace ctcex
+namespace ctcexec
+namespace ctc_exec
+namespace ct_exec
+namespace ctexec
+namespace ctex
+namespace ct_run
+namespace ctrun
+namespace ctr
+namespace prerun
+namespace ma_run
+namespace meta_run
+namespace meta_exec
+namespace cmeta
+namespace c_meta
+namespace ctc	// compile-time C/C++
+namespace ctx //! vs context
+
+// typedef
+// typedef void(*fp)(int, int);
+// alias
+// using fp2 = void(int, int);
+
 
 
 clang:
@@ -20,7 +58,7 @@ llvm passes (also plugins)
 /home/maliusarth/projects/ext/projects/cmake/llvm/6.0.0/x64/lib/libInject.a
 
 
-how to add a pre build step?
+how to add a pre build step? cmake, make, etc.
 
 
 edited clang src:

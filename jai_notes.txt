@@ -1,0 +1,157 @@
+jai notes from (https://www.youtube.com/watch?v=ZHqFrNyLlpA):
+
+#import "Basic"; // not include more like modules
+
+#load "misc.jai"; // c++ include, including text files
+
+// All compiler options, linking options, and the like
+// would be set in here as well!
+
+// Goal: Radically simplify cross-platform development,
+// remove dependency on culture of lousy tools.
+
+use cases of compile time execution:
+e.g getting data from build server if needed
+
+
+
+// execute at runtime
+main :: () {
+	testproc();
+}
+
+// execute at compile-time
+#run testproc();
+
+
+#pragma run testproc();
+#pragma run testproc(123, 123, 123);
+
+#pragma run 123 123 123
+testproc(int a, int b, int c)
+{
+
+}
+
+MA_RUN(123, 123, 123)
+testproc(int a, int b, int c)
+{
+
+}
+
+
+Jonathan Blow:
+"In C++ people geek out about how template specifications are turing complete, that's so cool. Except it's not that cool, it's lame because they are hard to use and you already have a turing complete language."
+
+//additional reference: https://www.youtube.com/watch?v=-UPFH0eWHEI&list=PLmV5I2fxaiCKfxMBrNsU1kgKJXD3PkyxO&index=4
+build :: () {
+	printf("In build (at compile time.\n");
+
+	s := #filepath; // current file path of the file being compiled
+	printf("file path is: %s\n", s);
+
+	//jon blow: and then we've got this build options stuff
+	//which are variables i can set to tell the compiler how to behave, right
+	//but im doing that from my own program
+	//im not doing it from an external program like make or visual studio or anything like that, right.
+	//by the time you write a complex video game or web server or.., i mean anything that's complicated, right,
+	//you're specifying a lot of very careful actions that that program has to perform perfectly, right.
+	//compared to what it actually does when it's running,
+	//building the programm ought to be really simple,
+	//so the idea that you need a totally separate system to specify the building of the program, its silly, right,
+	//because you are already able to specify things that are much more complicated
+	//and you're just making the situation much more needlessly complicated as soon as you involve a make language or an IDE with special menus that make it really hard to change all the options and all the variants of your build, right.
+	//so Im going to show a more practical way how to approach this:
+
+	// this is ok for a sinple programmer but for teams this might conflict with other people
+	// see build_common/build_debug/build_release
+	build_options.optimization_level = Optimization_Level.DEBUG;
+	build_options.emit_line_directives = false;
+	build_options.executable_name = "traveller";
+
+	update_build_options();
+
+	// Load files:
+	set_build_file_path(s)
+
+	add_build_file("misc.jai");
+	add_build_file("invaders.jai");
+	add_build_file("checks.jai");
+	add_build_file("levels.jai");
+
+	//jon blow: "there is no preprocessor in this at all, right, so all these directives are part of the regular language
+	//there is no macro system on top, there is not preprocessor system on top, we're aiming for maximum simplicity with maximum power generated from this simplicity.
+	//however, if you want a preprocessor you can make one:
+
+	rot13 := (input: string) -> string {
+		result := strdup(input);
+
+		s := cast(result, u8 *);
+		while *s {
+			c := *s;
+			if c >= 'A && c <= 'Z then {
+				c += 13;
+				if c> 'Z then c -= 26;
+				s[0] = c;
+			}
+
+			s += 1;
+		}
+
+		return result;
+	}
+
+	encoded := "#eha cevags(\"\\a\\aGuvf vf n frevbhfyl raplcurerq fgevat!!!\\a\\a\\a\");"
+	decoded := rot13(encoded);
+
+	add_build_string(decoded);
+	// => printf("\n\nThis is a seriously encyphered string!!!\n\n\n");
+
+	//its an open question wether we should encourage people to abuse that kind of power
+	//because you want a common language everybody can understand
+	//you don't want, like, maniac preprocessors flying all over the place
+	//but you can build a maniac preprocessor
+	////and it doesnt have to be an external tool
+	//and you dont need to have, like, Make or, like, Visual Studio pre build step or something..
+	//like, run your stupid preprocessor, it's built-in, it'll not fail, it's great, it's wonderful, it's simple
+}
+
+build_common :: () {
+	printf("In build (at compile time.\n");
+
+	s := #filepath; // current file path of the file being compiled
+	printf("file path is: %s\n", s);
+
+	printf("build_options.executable_name = %s\n", build_options.executable_name);
+	printf("build_options.output_path = %s\n", build_options.output_path);
+
+	build_options.executable_name = "traveller";
+
+	// Load files:
+	set_build_file_path(s)
+
+	add_build_file("misc.jai");
+	add_build_file("invaders.jai");
+	add_build_file("checks.jai");
+	add_build_file("levels.jai");
+}
+
+build_debug :: () {
+	build_common();
+
+	build_options.optimization_level = Optimization_Level.DEBUG;
+	build_options.emit_line_directives = false;
+
+	update_build_options();
+}
+
+he allocates stuff in BSS (unallocated memory(?))
+
+compile-time code could target c++ or directly bytecode
+
+call functions via
+#run build_debug from inside the code
+or in case of multiple programmers
+
+call it from commandline
+jai traveller/first.jai -run build_debug()

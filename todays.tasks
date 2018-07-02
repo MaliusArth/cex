@@ -1,6 +1,24 @@
 25.05.2018:
-	☐ setup CMakeLists.txt files properly
-		☐ add compileCommands to c_cpp_properties.json
+	✔ setup CMakeLists.txt files properly @done(18-06-22 17:37)
+		✔ add compileCommands to c_cpp_properties.json @done(18-06-22 17:37)
 		"compileCommands": "/home/maliusarth/projects/ext/projects/cmake/llvm/6.0.0/x64/compile_commands.json",
-	
-	
+
+22.06.2018:
+	☐ /home/maliusarth/projects/ext/repos/llvm/6.0.0/tools/clang/examples/AnnotateFunctions/AnnotateFunctions.cpp
+	☐ /home/maliusarth/projects/ext/repos/llvm/6.0.0/tools/clang/examples/PrintFunctionNames/PrintFunctionNames.cpp
+
+25.06.2018:
+	☐ call function from command line
+		☐ handle command line arguments
+	☐ call function via macro (for now)
+	☐ call function via pragma (some time later)
+
+
+	☐ create a vscode task to update cmake only without building
+	☐ check out cmake extensions to automatically create CMakeLists.txt entries when creating new files etc.
+
+	☐ clang -main-file-name test.cpp
+	check out -main-file-name handling to use as limitation for #pragma run search (for faster compile-time, especially in bigger projects)
+	but make it optional (possibly also let the pass concrete files to use for compile time execution lookup)
+
+	-fstrict-aliasing -Wstrict-aliasing=2
