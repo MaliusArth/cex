@@ -92,3 +92,4 @@ build
 *.bc
 *.ll
 .vs/
+*.code-workspace
