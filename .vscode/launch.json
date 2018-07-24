@@ -5,18 +5,18 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "lldb C++",
+			"name": "Debug tool",
 			"type": "cppdbg",
 			"request": "launch",
-			"program": "/home/maliusarth/projects/ext/projects/cmake/llvm/6.0.0/x64/bin/inject++",
-			"args": ["-run=ma_ct_main()", "src/test.cpp"],
+			"program": "/home/maliusarth/projects/ext/projects/cmake/llvm/6.0.0/x64/bin/cex_d",
+			"args": ["-run=cex_main()", "../src/test.cpp", "-p=compile_commands.json", "-extra-arg=-v"],
 			"stopAtEntry": true,
-			"cwd": "${workspaceFolder}/inject++/test",
+			"cwd": "${workspaceFolder}/test/build",
 			"environment": [],
 			"externalConsole": false,
 			"MIMode": "lldb",
 			"miDebuggerPath": "/usr/bin/lldb-mi-6.0",
-			"preLaunchTask": "ninja build"
+			"preLaunchTask": "ninja build tool"
 			//"setupCommands": [
 			//	{
 			//		"description": "Enable pretty-printing for gdb",
@@ -25,6 +25,31 @@
 			//	}
 			//]
 			// "additionalSOLibSearchPath": ""
+/* 			"logging": {
+				"programOutput": true
+			} */
+		},
+		{
+			"name": "Debug plugin",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "/usr/local/bin/opt",
+			"args": ["-load=CEXPlugin_d.so", " test.ll"],
+			"stopAtEntry": true,
+			"cwd": "${workspaceFolder}/test/build",
+			"environment": [],
+			"externalConsole": false,
+			"MIMode": "lldb",
+			"miDebuggerPath": "/usr/bin/lldb-mi-6.0",
+			"preLaunchTask": "ninja build plugin",
+			//"setupCommands": [
+			//	{
+			//		"description": "Enable pretty-printing for gdb",
+			//		"text": "-enable-pretty-printing",
+			//		"ignoreFailures": true
+			//	}
+			//]
+			"additionalSOLibSearchPath": "/home/maliusarth/projects/ext/projects/cmake/llvm/6.0.0/x64/lib"
 /* 			"logging": {
 				"programOutput": true
 			} */

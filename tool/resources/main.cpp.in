@@ -1,0 +1,8 @@
+// cex includes
+
+int main(int argc, char const**argv)
+{
+	// cex func
+
+	return true;
+}

@@ -4,7 +4,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "ninja build",
+            "label": "ninja build tool",
             "type": "shell",
             "options": {
                 "cwd": "/home/maliusarth/projects/ext/projects/cmake/llvm/6.0.0/x64"
@@ -19,7 +19,28 @@
                 "reveal": "always",
                 "focus": false,
                 "panel": "shared"
-            }
+            },
+            "problemMatcher":"$gcc"
+        },
+        {
+            "label": "ninja build plugin",
+            "type": "shell",
+            "options": {
+                "cwd": "/home/maliusarth/projects/ext/projects/cmake/llvm/6.0.0/x64"
+            },
+            "command": "clear && ninja CEXPlugin",
+            "group":  "build",
+            "problemMatcher":"$gcc"
+        },
+        {
+            "label": "ninja build test",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceFolder}/test/build"
+            },
+            "command": "ninja -v ${workspaceFolderBasename}_test",
+            "group": "build",
+            "problemMatcher":"$gcc"
         },
         {
             "label": "cmake rerun",
@@ -28,29 +49,32 @@
                 "cwd": "/home/maliusarth/projects/ext/projects/cmake/llvm/6.0.0/x64"
             }, */
             "command": "clear && cmake -H/home/maliusarth/projects/ext/repos/llvm/6.0.0 -B/home/maliusarth/projects/ext/projects/cmake/llvm/6.0.0/x64",
-            "group":  "build"
+            "group":  "build",
+            "problemMatcher":"$gcc"
         },
         {
-            "label": "ninja clean",
+            "label": "ninja clean tool",
             "type": "shell",
             "options": {
                 "cwd": "/home/maliusarth/projects/ext/projects/cmake/llvm/6.0.0/x64"
             },
             "command": "ninja -v -t clean ${workspaceFolderBasename}",
-            "group": "build"
+            "group": "build",
+            "problemMatcher":"$gcc"
         },
         {
-            "label": "ninja rebuild",
+            "label": "ninja rebuild tool",
             "dependsOn": "ninja clean",
             "type": "shell",
             "options": {
                 "cwd": "/home/maliusarth/projects/ext/projects/cmake/llvm/6.0.0/x64"
             },
             "command": "ninja -v ${workspaceFolderBasename}",
-            "group": "build"
+            "group": "build",
+            "problemMatcher":"$gcc"
         },
         {
-            "label": "clang emit bitcode - single file",
+            "label": "clang emit bitcode - current file",
             "type": "shell",
             "options": {
                 "cwd": "/home/maliusarth/projects/ext/projects/cmake/llvm/6.0.0/x64"
@@ -64,69 +88,68 @@
                 "-o",
                 "${file}.bc"
             ],
-            "group": "build"
+            "group": "build",
+            "problemMatcher":"$gcc"
         },
         {
-            "label": "clang emit bitcode",
+            "label": "clang test emit ll",
             "type": "shell",
             "options": {
-                "cwd": "/home/maliusarth/projects/ext/projects/cmake/llvm/6.0.0/x64"
+                "cwd": "${workspaceFolder}/test/build"
             },
             "command": "clang++",
             "args": [
-                "-DGTEST_HAS_RTTI=0",
-                "-D_DEBUG",
-                "-D_GNU_SOURCE",
-                "-D__STDC_CONSTANT_MACROS",
-                "-D__STDC_FORMAT_MACROS",
-                "-D__STDC_LIMIT_MACROS",
-                "-fno-exceptions",
-                "-fno-rtti",
-                "-fno-common",
-                "-fPIC",
-                "-fvisibility-inlines-hidden",
-                "-fcolor-diagnostics",
-                "-ffunction-sections",
-                "-fdata-sections",
-                "-Wall",
-                "-W",
-                "-Wno-unused-parameter",
-                "-Wwrite-strings",
-                "-Wcast-qual",
-                "-Wmissing-field-initializers",
-                "-pedantic",
-                "-Wno-long-long",
-                "-Wcovered-switch-default",
-                "-Wnon-virtual-dtor",
-                "-Wdelete-non-virtual-dtor",
-                "-Wstring-conversion",
-                "-Woverloaded-virtual",
-                "-Wno-nested-anon-types",
-                "-Werror=date-time",
-                "-Werror=unguarded-availability-new",
+                "-I../include", "-I../../lib/include",
+                "-g",
                 "-std=c++11",
-                "-O3",
-                "-UNDEBUG",
-                "-c", //Only run preprocess, compile, and assemble steps
-                // includes
-                // llvm
-                "-I/home/maliusarth/projects/ext/repos/llvm/6.0.0/include",
-                "-I/home/maliusarth/projects/ext/repos/llvm/6.0.0/tools/clang/include",
-                // code gen
-                "-Iinclude",
-                "-Itools/clang/include",
-                "-Itools/clang/tools/extra/inject++",
-                // project
-                "-I${workspaceFolder}/inject++/include",
+                "-Wall", "-Wfloat-conversion",
+                "-DCEX_RUN_USE",
+                // "-MMD",
+                // "-MT", "CMakeFiles/cex_test.dir/src/test.cpp.o",
+                // "-MF", "CMakeFiles/cex_test.dir/src/test.cpp.o.d",
+                // "-o", "CMakeFiles/cex_test.dir/src/test.cpp.bc",
+                // "-c", //Only run preprocess, compile, and assemble steps
+                "../src/test.cpp",
                 "-S",
                 "-emit-llvm",
                 // src - inputs
-                "${workspaceFolder}/inject++/tool/main.cpp",
-                // "${workspaceFolder}/inject++/libInject.cpp",
-                "-o",
-                "${workspaceFolder}/${workspaceFolderBasename}.bc"
+                // "${workspaceFolder}/cex/tool/main.cpp",
+                // "${workspaceFolder}/cex/libCEX.cpp",
+                // "-o",
+                // "${workspaceFolder}/${workspaceFolderBasename}.bc"
             ],
-            "group": "build"
+            "group": "build",
+            "problemMatcher":"$gcc"
+        },
+        {
+            "label": "clang test emit bc",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceFolder}/test/build"
+            },
+            "command": "clang++",
+            "args": [
+                "-I../include", "-I../../lib/include",
+                "-g",
+                "-std=c++11",
+                "-Wall", "-Wfloat-conversion",
+                "-DCEX_RUN_USE",
+                // "-MMD",
+                // "-MT", "CMakeFiles/cex_test.dir/src/test.cpp.o",
+                // "-MF", "CMakeFiles/cex_test.dir/src/test.cpp.o.d",
+                // "-o", "CMakeFiles/cex_test.dir/src/test.cpp.bc",
+                "-c", // Only run preprocess, compilation, and assemble steps
+                "../src/test.cpp",
+                // "-S", // Only run preprocess and compilation steps
+                "-emit-llvm",
+                // src - inputs
+                // "${workspaceFolder}/cex/tool/main.cpp",
+                // "${workspaceFolder}/cex/libCEX.cpp",
+                // "-o",
+                // "${workspaceFolder}/${workspaceFolderBasename}.bc"
+            ],
+            "group": "build",
+            "problemMatcher":"$gcc"
         },
         {
             "label": "clang build",
@@ -177,27 +200,19 @@
                 // code gen
                 "-Iinclude",
                 "-Itools/clang/include",
-                "-Itools/clang/tools/extra/inject++",
+                "-Itools/clang/tools/extra/cex",
                 // project
-                "-I${workspaceFolder}/inject++/include",
+                "-I${workspaceFolder}/cex/include",
                 // "-S",
                 // "-emit-llvm",
                 // src - inputs
-                "${workspaceFolder}/inject++/tool/main.cpp",
-                // "${workspaceFolder}/inject++/libInject.cpp",
+                "${workspaceFolder}/cex/tool/main.cpp",
+                // "${workspaceFolder}/cex/libInject.cpp",
                 // "-o",
                 // "${workspaceFolder}/${workspaceFolderBasename}.bc"
             ],
-            "group": "build"
-        },
-        {
-            "label": "ninja build test",
-            "type": "shell",
-            "options": {
-                "cwd": "${workspaceFolder}/inject++/test/build"
-            },
-            "command": "ninja -v inject_test",
-            "group": "build"
-        },
+            "group": "build",
+            "problemMatcher":"$gcc"
+        }
     ]
 }

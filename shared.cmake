@@ -1,0 +1,5 @@
+set(MALIUS_ROOT /home/maliusarth/projects/malius)
+set(CMAKE_BUILD_TYPE Debug)
+# set(CMAKE_BUILD_TYPE Release)
+set(CMAKE_DEBUG_POSTFIX _d)
+# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")

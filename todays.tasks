@@ -21,4 +21,28 @@
 	check out -main-file-name handling to use as limitation for #pragma run search (for faster compile-time, especially in bigger projects)
 	but make it optional (possibly also let the pass concrete files to use for compile time execution lookup)
 
-	-fstrict-aliasing -Wstrict-aliasing=2
+06.07.2018:
+	☐ git shit!!!!!!!!
+
+key features:
+	☐ build & run c++ at compile-time
+
+	Tooling.h:110:
+		☐ SourceFileCallbacks
+		/// \brief Callbacks called before and after each source file processed by a
+		/// FrontendAction created by the FrontedActionFactory returned by \c
+		/// newFrontendActionFactory.
+
+	☐ expose multiple stages of the actual compilation process of the entire program
+
+	target_link_libraries( ${PROJECT_NAME}_${CMAKE_BUILD_TYPE}
+		PRIVATE
+		clangTooling
+		clangBasic
+		clangASTMatchers
+		# Inject
+		MALog
+		MAConfig
+
+	)
+		MA_LEXER, MA_PREPROCESSOR, MA_COMPILER, MA_LINKER
