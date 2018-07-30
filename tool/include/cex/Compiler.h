@@ -2,13 +2,9 @@
 
 #include "clang/Frontend/CompilerInstance.h"
 
-
-
-
-
-#include "llvm/LLVMContext.h"
-#include "llvm/Module.h"
-#include "llvm/Support/IRBuilder.h"
+#include "llvm/IR/LLVMContext.h"
+#include "llvm/IR/Module.h"
+#include "llvm/IR/IRBuilder.h"
 
 
 
@@ -20,16 +16,16 @@ class Preprocessor
 {
 	void run()
 	{
-		CompilerInstance ci;
+		clang::CompilerInstance ci;
 		ci.createDiagnostics(); // create DiagnosticsEngine
 		ci.createFileManager();  // create FileManager
 		ci.createSourceManager(ci.getFileManager()); // create SourceManager
-		ci.createPreprocessor();  // create Preprocessor
-		const FileEntry *pFile = ci.getFileManager().getFile("hello.c");
+		ci.createPreprocessor(clang::TranslationUnitKind::TU_Complete);  // create Preprocessor
+		const clang::FileEntry *pFile = ci.getFileManager().getFile("hello.c");
 		ci.getSourceManager().createMainFileID(pFile);
 		ci.getPreprocessor().EnterMainSourceFile();
 		ci.getDiagnosticClient().BeginSourceFile(ci.getLangOpts(), &ci.getPreprocessor());
-		Token tok;
+		clang::Token tok;
 		do {
 			ci.getPreprocessor().Lex(tok);
 			if( ci.getDiagnostics().hasErrorOccurred())

@@ -4,8 +4,8 @@
 // Main Module Header
 // a.k.a. the header file containing the interfaces a .cpp file implements
 // (.h/.cpp pairs)
-#include "CompileTimeRunner.h"
-#include "binding_ids.h"
+#include "cex/CompileTimeRunner.h"
+#include "cex/binding_ids.h"
 // #include "matchUtility.h"
 
 // Local/Private Headers

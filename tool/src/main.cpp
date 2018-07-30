@@ -12,16 +12,17 @@
 // #include "CompileTimeRunner.h"
 
 // AST includes
-#include "MatchCallbacks/AnnotatedFunctionCallback.h"
-#include "MatchCallbacks/NamedFunctionCallback.h"
-#include "matchers.h"
+#include "cex/MatchCallbacks/AnnotatedFunctionCallback.h"
+#include "cex/MatchCallbacks/NamedFunctionCallback.h"
+#include "cex/matchers.h"
 
 // IR includes
-#include "Actions/EmitBitcodeAction.h"
-#include "JIT.h"
-#include "utils.h"
+#include "cex/Actions/EmitBitcodeAction.h"
+#include "cex/JIT.h"
+#include "cex/utils.h"
 
-#include "tmp.h"
+#include "cex/tmp.h"
+// #include "cex/Compiler.h"
 // #include "setupCompilerInstance.h"
 
 // #include "hooks/macro_approach.h"
@@ -249,6 +250,15 @@ int main(int argc, const char **argv)
 
 	// ::clang::CompilerInstance compiler;	// vfs::getRealFileSystem()
 	// ::msc::cex::setupCompilerInstance(compiler, tool.getFiles());
+
+
+	// msc::cex::Preprocessor pp;
+	// pp.run();
+
+
+
+
+
 
 	// ---------- JIT ----------
 	// works on *.bc or *.ll
